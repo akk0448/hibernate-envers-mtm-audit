@@ -1,0 +1,3 @@
+io.github.akk0448.mtm.audit.config.DdlStrategyConfig
+io.github.akk0448.mtm.audit.config.HibernateEventListenerConfig
+io.github.akk0448.mtm.audit.config.MtmAuditConfiguration
