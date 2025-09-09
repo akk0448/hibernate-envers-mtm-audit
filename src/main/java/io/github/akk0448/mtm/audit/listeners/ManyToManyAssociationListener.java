@@ -17,6 +17,13 @@ import java.util.Map;
 import static io.github.akk0448.mtm.audit.events.ManyToManyAuditEvent.createAuditEvent;
 import static io.github.akk0448.mtm.audit.utils.AuditUtils.*;
 
+/**
+ * Hibernate event listener for Many-to-Many association audit events.
+ * Captures POST-INSERT events on join table audit records.
+ *
+ * @author Aniket Kumar
+ * @since 1.0.0
+ */
 @Slf4j
 public class ManyToManyAssociationListener implements PostInsertEventListener {
 
@@ -28,6 +35,9 @@ public class ManyToManyAssociationListener implements PostInsertEventListener {
         this.auditEventPublisher = auditEventPublisher;
     }
 
+    /**
+     * Handles POST-INSERT events on Many-to-Many association audit tables.
+     */
     @Override
     public void onPostInsert(PostInsertEvent event) {
         Map<String, AuditManyToManyAssociationMetadata> auditAssociationMetadata =

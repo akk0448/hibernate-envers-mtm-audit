@@ -10,6 +10,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.annotation.PostConstruct;
 import java.util.*;
 
+/**
+ * Creates and maintains Many-to-Many audit tables during application startup.
+ *
+ * @author Aniket Kumar
+ * @since 1.0.0
+ */
 @RequiredArgsConstructor
 @Slf4j
 public class AuditTableCreator {
@@ -18,6 +24,9 @@ public class AuditTableCreator {
     private final DdlGenerationStrategy ddlStrategy;
     private final JdbcTemplate jdbcTemplate;
 
+    /**
+     * Initializes audit tables for detected Many-to-Many associations.
+     */
     @PostConstruct
     public void createAuditTables() {
         Map<String, AuditManyToManyAssociationMetadata> metadataMap = auditScanner.getAuditAssociationMetadata();

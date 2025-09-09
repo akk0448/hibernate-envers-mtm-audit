@@ -12,11 +12,26 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 
+/**
+ * Service responsible for persisting audit records for Many-to-Many association changes.
+ * Operates within isolated transactions to ensure audit data integrity regardless of
+ * the outcome of main business transactions.
+ *
+ * @author Aniket Kumar
+ * @since 1.0.0
+ */
 public class ManyToManyAuditService {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Persists an audit event to the corresponding audit table.
+     * Executes in a new transaction context to maintain data consistency.
+     *
+     * @param event the audit event to persist
+     * @throws RuntimeException if persistence fails
+     */
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void persistAuditEntity(ManyToManyAuditEvent event) {
         try {

@@ -8,8 +8,21 @@ import org.hibernate.envers.RevisionType;
 
 import java.util.Map;
 
+/**
+ * Utility methods for Many-to-Many audit data processing and conversion.
+ *
+ * @author Aniket Kumar
+ * @since 1.0.0
+ */
 public class AuditUtils {
 
+    /**
+     * Retrieves a value from a map using case-insensitive key matching.
+     *
+     * @param map the map containing the data
+     * @param logicalKey the key to search for (case-insensitive)
+     * @return the value associated with the key, or null if not found
+     */
     public static Object getValueIgnoreCase(Map<String, Object> map, String logicalKey) {
         return map.entrySet().stream()
                 .filter(e -> e.getKey().equalsIgnoreCase(logicalKey))
@@ -18,6 +31,13 @@ public class AuditUtils {
                 .orElse(null);
     }
 
+    /**
+     * Converts AuditJoinColumn metadata to ManyToManyJoinColumn data.
+     *
+     * @param map the data map containing column values
+     * @param columns the metadata columns to extract
+     * @return array of ManyToManyJoinColumn with extracted values
+     */
     public static ManyToManyJoinColumn[] getColumnData(Map<String, Object> map, AuditJoinColumn[] columns) {
         int n = columns.length;
         ManyToManyJoinColumn[] joinColumns = new ManyToManyJoinColumn[n];
@@ -30,6 +50,12 @@ public class AuditUtils {
         return joinColumns;
     }
 
+    /**
+     * Maps Hibernate Envers RevisionType to AuditAction.
+     *
+     * @param revisionType the Hibernate Envers revision type
+     * @return the corresponding AuditAction
+     */
     public static AuditAction resolveAuditAction(RevisionType revisionType) {
         return switch (revisionType) {
             case ADD -> AuditAction.INSERT;
@@ -38,6 +64,12 @@ public class AuditUtils {
         };
     }
 
+    /**
+     * Extracts timestamp from Hibernate Envers revision entity.
+     *
+     * @param defaultRevisionEntity the revision entity
+     * @return timestamp of the audited operation
+     */
     public static long resolveAuditTimestamp(DefaultRevisionEntity defaultRevisionEntity) {
         return defaultRevisionEntity.getTimestamp();
     }

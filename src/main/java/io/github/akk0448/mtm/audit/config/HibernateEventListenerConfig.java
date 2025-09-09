@@ -11,17 +11,10 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
 
 /**
- * Configuration class responsible for registering Hibernate event listeners
- * specifically for Many-to-Many association join table auditing.
+ * Registers Hibernate event listeners for Many-to-Many association auditing.
  *
- * <p>This class registers the {@link ManyToManyAssociationListener} to
- * capture POST-INSERT events on Hibernate Envers-generated audit tables
- * for Many-to-Many relationships, enabling tracking of association changes.
- * </p>
- *
- * @since 1.0.0
  * @author Aniket Kumar
- * @see ManyToManyAssociationListener
+ * @since 1.0.0
  */
 @Configuration
 public class HibernateEventListenerConfig {
@@ -33,13 +26,7 @@ public class HibernateEventListenerConfig {
     private ManyToManyAssociationListener manyToManyAssociationListener;
 
     /**
-     * Registers the Many-to-Many association listener with Hibernate's
-     * event system to monitor Envers audit tables.
-     *
-     * <p>The listener specifically tracks changes in the join table audit tables
-     * (suffixed with _aud) that Hibernate Envers automatically creates for
-     * Many-to-Many relationships.
-     * </p>
+     * Registers Many-to-Many association listener with Hibernate event system.
      */
     @PostConstruct
     public void registerListeners() {

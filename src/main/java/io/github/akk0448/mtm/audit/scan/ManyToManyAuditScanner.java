@@ -18,6 +18,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Scans entities for Many-to-Many associations requiring audit tracking.
+ *
+ * @author Aniket Kumar
+ * @since 1.0.0
+ */
 @Slf4j
 public class ManyToManyAuditScanner {
 
@@ -32,6 +38,9 @@ public class ManyToManyAuditScanner {
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
 
+    /**
+     * Scans JPA entities for Many-to-Many associations with audit annotation.
+     */
     @PostConstruct
     public void scanEntities() {
         Map<String, AuditManyToManyAssociationMetadata> tempMap = new HashMap<>();

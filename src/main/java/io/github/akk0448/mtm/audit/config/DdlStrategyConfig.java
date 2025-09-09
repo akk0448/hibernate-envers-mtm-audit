@@ -13,30 +13,21 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Map;
 
 /**
- * Configuration class for DDL generation strategy beans.
- * Automatically detects the database dialect and provides the appropriate
- * DDL generation strategy for audit table creation.
+ * Configures DDL generation strategies based on detected database dialect.
  *
- * <p>This configuration supports multiple database dialects and returns
- * the appropriate strategy implementation based on the detected Hibernate dialect.
- * </p>
- *
- * @since 1.0.0
  * @author Aniket Kumar
- * @see DdlGenerationStrategy
- * @see MySqlDdlGenerationStrategy
+ * @since 1.0.0
  */
 @Configuration
 @Slf4j
 public class DdlStrategyConfig {
 
     /**
-     * Creates a DDL generation strategy bean based on the detected database dialect.
-     * The strategy provides database-specific SQL for creating and managing audit tables.
+     * Provides a DDL generation strategy appropriate for the current database dialect.
      *
-     * @param emf the EntityManagerFactory used to detect the database dialect
-     * @return the appropriate DDLGenerationStrategy for the current database
-     * @throws UnsupportedOperationException if the database dialect is not supported
+     * @param emf the EntityManagerFactory
+     * @return configured DDL generation strategy
+     * @throws UnsupportedOperationException for unsupported dialects
      */
     @Bean
     public DdlGenerationStrategy ddlGenerationStrategy(EntityManagerFactory emf) {

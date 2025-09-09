@@ -7,6 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MySQL database implementation of DDL generation strategy.
+ *
+ * @author Aniket Kumar
+ * @since 1.0.0
+ */
 @Slf4j
 public class MySqlDdlGenerationStrategy implements DdlGenerationStrategy {
 
@@ -72,7 +78,6 @@ public class MySqlDdlGenerationStrategy implements DdlGenerationStrategy {
                 tableName, col.columnName(), mapJavaTypeToSqlType(col.columnClassType())
         );
     }
-
 
     private String mapJavaTypeToSqlType(Class<?> javaType) {
         if (javaType == Integer.class || javaType == int.class) {

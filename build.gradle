@@ -1,8 +1,7 @@
 plugins {
 	id 'java'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE' // Keep this for version management
-	// REMOVED: id 'org.springframework.boot' version '2.7.14'
-	id 'java-library' // Better than just 'java' for libraries
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java-library'
 }
 
 group = 'io.github.akk0448'
@@ -22,35 +21,27 @@ repositories {
 	mavenCentral()
 }
 
-// This block is crucial for managing Spring dependencies without the Boot plugin
 dependencyManagement {
 	imports {
-		mavenBom "org.springframework.boot:spring-boot-dependencies:2.7.14" // Import the BOM for consistent versions
+		mavenBom "org.springframework.boot:spring-boot-dependencies:2.7.14"
 	}
 }
 
 dependencies {
-	// These are the dependencies your library NEEDS TO COMPILE
-	// But they should NOT be bundled into the final JAR
-
 	compileOnly 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.springframework.boot:spring-boot-starter-security'
-	compileOnly 'org.springframework.boot:spring-boot-starter-web' // Keep if you use web annotations like @RestController
 
-	compileOnly 'org.hibernate:hibernate-envers' // Provided by the app's data-jpa starter
+	compileOnly 'org.hibernate:hibernate-envers'
 
-	// This will be bundled with your library since it's not provided by Spring Boot
 	implementation 'org.apache.commons:commons-lang3:3.18.0'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	// Optional: Add these if your library does auto-configuration
 	compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
 	compileOnly 'org.springframework:spring-context'
 }
 
-// Optional but recommended: Configure the JAR task to add build info
 jar {
 	manifest {
 		attributes(

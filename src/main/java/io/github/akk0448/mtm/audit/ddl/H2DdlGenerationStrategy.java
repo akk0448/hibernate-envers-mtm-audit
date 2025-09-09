@@ -7,6 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * H2 database implementation of DDL generation strategy.
+ *
+ * @author Aniket Kumar
+ * @since 1.0.0
+ */
 @Slf4j
 public class H2DdlGenerationStrategy implements DdlGenerationStrategy {
 
